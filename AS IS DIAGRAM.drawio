@@ -72,7 +72,7 @@
             <mxPoint x="140.83841463414637" y="182" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3" parent="2" style="swimlane;whiteSpace=wrap" value="Sælger (Fog)" vertex="1">
+        <mxCell id="3" parent="2" style="swimlane;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Sælger (Fog)" vertex="1">
           <mxGeometry height="1760" width="402.74" x="280.5" as="geometry" />
         </mxCell>
         <mxCell id="YWcOBySC02p43ZR_YnLl-64" edge="1" parent="3" source="YWcOBySC02p43ZR_YnLl-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="YWcOBySC02p43ZR_YnLl-63" value="">
@@ -111,7 +111,7 @@
         <mxCell id="YWcOBySC02p43ZR_YnLl-85" parent="3" style="whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;" value="Sender email med tilbud (Uden materialeliste!)" vertex="1">
           <mxGeometry height="60" width="120" x="145.5" y="1042" as="geometry" />
         </mxCell>
-        <mxCell id="YWcOBySC02p43ZR_YnLl-89" parent="3" style="whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;" value="Ringer til kunde og følger op" vertex="1">
+        <mxCell id="YWcOBySC02p43ZR_YnLl-89" parent="3" style="whiteSpace=wrap;html=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" value="Ringer til kunde og følger op" vertex="1">
           <mxGeometry height="60" width="120" x="75.48" y="1152" as="geometry" />
         </mxCell>
         <mxCell id="YWcOBySC02p43ZR_YnLl-98" parent="3" style="whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;" value="Skriver ordre materialer ind i M3 system" vertex="1">
