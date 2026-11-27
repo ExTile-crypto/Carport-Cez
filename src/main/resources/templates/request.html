@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Ny carport')}">
+    <meta charset="UTF-8">
+    <title>Ny carport – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+<header th:replace="~{fragments/layout :: topbar('Carport projekt')}"></header>
+<aside th:replace="~{fragments/layout :: sidebar('new', ${role})}"></aside>
+
+<main class="main">
+
+    <div class="page-head">
+        <div>
+            <h1>Ny carport – Forespørgsel</h1>
+            <p>Indtast mål og kontaktoplysninger. Du får en tegning og en pris retur.</p>
+        </div>
+    </div>
+
+    <form th:action="@{/request}" method="post">
+        <div class="grid grid-wide">
+
+            <!-- LEFT: form -->
+            <div class="col">
+
+                <section class="card">
+                    <div class="card-head">
+                        <svg><use href="#i-sliders"/></svg>
+                        Carportens mål
+                    </div>
+                    <div class="card-body">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="width">Bredde (udvendig)</label>
+                                <div class="control select">
+                                    <select id="width" name="width" required>
+                                        <option value="">Vælg bredde</option>
+                                        <option value="240">240 cm</option>
+                                        <option value="270">270 cm</option>
+                                        <option value="300">300 cm</option>
+                                        <option value="330">330 cm</option>
+                                        <option value="360">360 cm</option>
+                                        <option value="390">390 cm</option>
+                                        <option value="420">420 cm</option>
+                                        <option value="450">450 cm</option>
+                                        <option value="480">480 cm</option>
+                                        <option value="510">510 cm</option>
+                                        <option value="540">540 cm</option>
+                                        <option value="570">570 cm</option>
+                                        <option value="600" selected>600 cm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="length">Længde (udvendig)</label>
+                                <div class="control select">
+                                    <select id="length" name="length" required>
+                                        <option value="">Vælg længde</option>
+                                        <option value="240">240 cm</option>
+                                        <option value="270">270 cm</option>
+                                        <option value="300">300 cm</option>
+                                        <option value="330">330 cm</option>
+                                        <option value="360">360 cm</option>
+                                        <option value="390">390 cm</option>
+                                        <option value="420">420 cm</option>
+                                        <option value="450">450 cm</option>
+                                        <option value="480">480 cm</option>
+                                        <option value="510">510 cm</option>
+                                        <option value="540">540 cm</option>
+                                        <option value="570">570 cm</option>
+                                        <option value="600">600 cm</option>
+                                        <option value="630">630 cm</option>
+                                        <option value="660">660 cm</option>
+                                        <option value="690">690 cm</option>
+                                        <option value="720">720 cm</option>
+                                        <option value="750">750 cm</option>
+                                        <option value="780" selected>780 cm</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="roof">Tagtype</label>
+                                <div class="control select">
+                                    <select id="roof" name="roof">
+                                        <option value="flat" selected>Fladt tag</option>
+                                    </select>
+                                </div>
+                                <span class="help">Vi tilbyder i øjeblikket kun fladt tag.</span>
+                            </div>
+                            <div class="field">
+                                <label>&nbsp;</label>
+                                <label class="check">
+                                    <input type="checkbox" name="shed" data-shed-toggle> Med redskabsrum
+                                </label>
+                            </div>
+
+                            <div class="field">
+                                <label for="shedWidth">Redskabsrum bredde</label>
+                                <div class="control">
+                                    <input type="number" id="shedWidth" name="shedWidth" placeholder="210" min="150" step="30" data-shed-field>
+                                    <span class="unit">cm</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="shedLength">Redskabsrum længde</label>
+                                <div class="control">
+                                    <input type="number" id="shedLength" name="shedLength" placeholder="530" min="150" step="30" data-shed-field>
+                                    <span class="unit">cm</span>
+                                </div>
+                            </div>
+
+                            <div class="field span-2">
+                                <label for="remarks">Bemærkninger (valgfrit)</label>
+                                <textarea class="textarea" id="remarks" name="remarks" placeholder="F.eks. ønsker om placering af redskabsrum, adgangsforhold m.m."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <svg><use href="#i-user"/></svg>
+                        Kontaktoplysninger
+                    </div>
+                    <div class="card-body">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="name">Navn</label>
+                                <div class="control"><input type="text" id="name" name="name" autocomplete="name" required></div>
+                            </div>
+                            <div class="field">
+                                <label for="email">E-mail</label>
+                                <div class="control"><input type="email" id="email" name="email" autocomplete="email" required></div>
+                            </div>
+                            <div class="field">
+                                <label for="phone">Telefon</label>
+                                <div class="control"><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+                            </div>
+                            <div class="field">
+                                <label for="address">Adresse</label>
+                                <div class="control"><input type="text" id="address" name="address" autocomplete="street-address"></div>
+                            </div>
+                            <div class="field">
+                                <label for="zip">Postnr.</label>
+                                <div class="control"><input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{4}" autocomplete="postal-code"></div>
+                            </div>
+                            <div class="field">
+                                <label for="password">Adgangskode</label>
+                                <div class="control"><input type="password" id="password" name="password" autocomplete="new-password" required></div>
+                                <span class="help">Bruges til at logge ind og følge din forespørgsel.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-foot">
+                        <a class="btn" th:href="@{/}" href="index.html"><svg><use href="#i-back"/></svg> Annullér</a>
+                        <span class="push" style="margin-left:auto"></span>
+                        <button type="submit" class="btn primary"><svg><use href="#i-send"/></svg> Send forespørgsel</button>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT: info -->
+            <div class="col">
+                <section class="card">
+                    <div class="card-head">
+                        <svg><use href="#i-info"/></svg>
+                        Sådan foregår det
+                    </div>
+                    <div class="card-body">
+                        <div class="stepper" style="padding:0; flex-direction:column; align-items:stretch; gap:14px">
+                            <div class="step current"><span class="n">1</span> Du sender en forespørgsel med mål og kontaktinfo.</div>
+                            <div class="step"><span class="n">2</span> En sælger gennemgår den og sender et tilbud.</div>
+                            <div class="step"><span class="n">3</span> Du ser tegning og pris på din side.</div>
+                            <div class="step"><span class="n">4</span> Når ordren er betalt, får du den fulde stykliste.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <svg><use href="#i-image"/></svg>
+                        Eksempel på tegning
+                    </div>
+                    <div class="drawing drawing-sm">
+                        <svg th:replace="~{fragments/drawing :: top(600, 780)}"></svg>
+                    </div>
+                    <div class="card-foot">
+                        <span class="help">Tegningen viser carporten set fra oven. Du modtager din egen tegning med tilbuddet.</span>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </form>
+
+</main>
+
+<script th:replace="~{fragments/layout :: scripts}" src="../public/js/app.js"></script>
+</body>
+</html>

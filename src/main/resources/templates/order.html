@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Ordre')}">
+    <meta charset="UTF-8">
+    <title>Ordre – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+<header th:replace="~{fragments/layout :: topbar('Carport projekt')}"></header>
+<aside th:replace="~{fragments/layout :: sidebar('orders', 'salesperson')}"></aside>
+
+<main class="main">
+
+    <div class="page-head">
+        <div>
+            <a class="muted" th:href="@{/orders}" href="orders.html">← Tilbage til ordrer</a>
+            <h1>Ordre <span class="muted">#a3f9…c21e</span></h1>
+            <p>Mette Sørensen · Carport 600 × 780 cm med redskabsrum · Oprettet 27.11.2026</p>
+        </div>
+        <div class="actions">
+            <span class="badge offer_sent" style="font-size:15px; padding:8px 14px">Tilbud sendt</span>
+        </div>
+    </div>
+
+    <!-- Status stepper -->
+    <section class="card mb-16">
+        <div class="stepper">
+            <div class="step done"><span class="n"><svg width="16" height="16"><use href="#i-check"/></svg></span> Forespørgsel</div>
+            <span class="step-line done"></span>
+            <div class="step current"><span class="n">2</span> Tilbud sendt</div>
+            <span class="step-line"></span>
+            <div class="step"><span class="n">3</span> Betalt</div>
+            <span class="step-line"></span>
+            <div class="step"><span class="n">4</span> Leveret</div>
+        </div>
+    </section>
+
+    <div class="grid grid-wide">
+
+        <!-- LEFT -->
+        <div class="col">
+
+            <!-- Drawing -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-image"/></svg>
+                    Tegning – set fra oven
+                    <div class="right">
+                        <a class="btn sm" th:href="@{/orders/{id}/drawing.svg(id='demo')}" href="#"><svg><use href="#i-download"/></svg> SVG</a>
+                    </div>
+                </div>
+                <div class="drawing">
+                    <svg th:replace="~{fragments/drawing :: top(600, 780)}"></svg>
+                </div>
+            </section>
+
+            <!-- Parts list -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-list"/></svg>
+                    Stykliste
+                    <div class="right muted" style="color:#c6ceda">Kun synlig for sælger indtil ordren er betalt</div>
+                </div>
+                <div class="card-body tight">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Materiale</th>
+                            <th class="num">Længde</th>
+                            <th class="num">Antal</th>
+                            <th>Enhed</th>
+                            <th>Beskrivelse</th>
+                            <th class="num">Pris</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- th:each="line : ${orderLines}" -->
+                        <tr><td>97×97 mm trykimp. stolpe</td><td class="num">300 cm</td><td class="num">6</td><td>stk</td><td class="muted">Stolper nedgraves 90 cm i jord</td><td class="num">1.794,00</td></tr>
+                        <tr><td>45×195 mm spærtræ ubh.</td><td class="num">600 cm</td><td class="num">2</td><td>stk</td><td class="muted">Remme i sider, sadles ned i stolper</td><td class="num">718,00</td></tr>
+                        <tr><td>45×195 mm spærtræ ubh.</td><td class="num">240 cm</td><td class="num">2</td><td>stk</td><td class="muted">Remme i sider, sadles ned i stolper (samling over stolpe)</td><td class="num">298,00</td></tr>
+                        <tr><td>45×195 mm spærtræ ubh.</td><td class="num">600 cm</td><td class="num">14</td><td>stk</td><td class="muted">Spær, monteres på rem</td><td class="num">5.026,00</td></tr>
+                        <tr><td>25×200 mm trykimp. brædt</td><td class="num">540 cm</td><td class="num">4</td><td>stk</td><td class="muted">Understernbrædder til for- og bagende</td><td class="num">716,00</td></tr>
+                        <tr><td>25×200 mm trykimp. brædt</td><td class="num">360 cm</td><td class="num">4</td><td>stk</td><td class="muted">Understernbrædder til siderne</td><td class="num">476,00</td></tr>
+                        <tr><td>25×125 mm trykimp. brædt</td><td class="num">540 cm</td><td class="num">4</td><td>stk</td><td class="muted">Oversternbrædder til forenden</td><td class="num">396,00</td></tr>
+                        <tr><td>Plastmo Ecolite blåtonet</td><td class="num">600 cm</td><td class="num">6</td><td>stk</td><td class="muted">Tagplader monteres på spær</td><td class="num">1.794,00</td></tr>
+                        <tr><td>Plastmo Ecolite blåtonet</td><td class="num">360 cm</td><td class="num">6</td><td>stk</td><td class="muted">Tagplader monteres på spær</td><td class="num">1.074,00</td></tr>
+                        <tr><td>Hulbånd 1×20 mm</td><td class="num">10 m</td><td class="num">1</td><td>rulle</td><td class="muted">Til vindkryds på spær</td><td class="num">149,00</td></tr>
+                        <tr><td>Universal 190 mm højre</td><td class="num">–</td><td class="num">14</td><td>stk</td><td class="muted">Til montering af spær på rem</td><td class="num">238,00</td></tr>
+                        <tr><td>Universal 190 mm venstre</td><td class="num">–</td><td class="num">14</td><td>stk</td><td class="muted">Til montering af spær på rem</td><td class="num">238,00</td></tr>
+                        <tr><td>Bræddebolt 10×120 mm</td><td class="num">–</td><td class="num">16</td><td>stk</td><td class="muted">Til montering af rem på stolper</td><td class="num">176,00</td></tr>
+                        <tr><td>Firkantskiver 40×40×11 mm</td><td class="num">–</td><td class="num">16</td><td>stk</td><td class="muted">Til montering af rem på stolper</td><td class="num">64,00</td></tr>
+                        <tr><td>Beslagskruer 4,0×50 mm</td><td class="num">–</td><td class="num">1</td><td>pakke</td><td class="muted">Til montering af universalbeslag + hulbånd</td><td class="num">89,00</td></tr>
+                        <tr><td>Plastmo bundskruer 200 stk.</td><td class="num">–</td><td class="num">2</td><td>pakke</td><td class="muted">Skruer til tagplader</td><td class="num">258,00</td></tr>
+                        </tbody>
+                        <tfoot>
+                        <tr><td colspan="5">Kostpris i alt (excl. moms)</td><td class="num">12.450,00 kr.</td></tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col">
+
+            <!-- Price & margin -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-calc"/></svg>
+                    Pris og dækningsgrad
+                </div>
+                <form class="card-body" th:action="@{/orders/{id}/price(id='demo')}" method="post">
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span class="lbl">Kostpris (materialer)</span>
+                            <span class="val" data-cost-price="12450">12.450,00 kr.</span>
+                        </div>
+                        <div class="field">
+                            <label for="salesPrice">Salgspris (excl. moms)</label>
+                            <div class="control">
+                                <input type="text" id="salesPrice" name="salesPrice" value="17995,00" inputmode="decimal" data-sales-price>
+                                <span class="unit">kr.</span>
+                            </div>
+                            <span class="help">Standard: kostpris + 30 % dækningsgrad. Kan ændres frit.</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="lbl">Dækningsgrad</span>
+                            <span class="val margin-good" data-margin>30,8 %</span>
+                        </div>
+                        <div class="price-row big">
+                            <span class="lbl">Pris til kunde</span>
+                            <span class="val">17.995,00 kr.</span>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <button type="submit" class="btn block"><svg><use href="#i-save"/></svg> Gem salgspris</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Status actions -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-send"/></svg>
+                    Handlinger
+                </div>
+                <div class="card-body">
+                    <div class="notice info mb-16">
+                        <svg><use href="#i-info"/></svg>
+                        <span>Kunden kan se tegning og pris. Styklisten frigives først, når status sættes til <strong>Betalt</strong>.</span>
+                    </div>
+                    <form th:action="@{/orders/{id}/status(id='demo')}" method="post" class="col" style="gap:10px">
+                        <button type="submit" name="status" value="offer_sent" class="btn primary block"><svg><use href="#i-mail"/></svg> Send tilbud til kunde</button>
+                        <button type="submit" name="status" value="paid" class="btn dark block"><svg><use href="#i-check"/></svg> Markér som betalt</button>
+                        <button type="submit" name="status" value="delivered" class="btn block" disabled><svg><use href="#i-cart"/></svg> Markér som leveret</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Customer -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-user"/></svg>
+                    Kunde
+                </div>
+                <div class="card-body">
+                    <dl class="details">
+                        <div><dt>Navn</dt><dd>Mette Sørensen</dd></div>
+                        <div><dt>Telefon</dt><dd>+45 20 12 34 56</dd></div>
+                        <div><dt>E-mail</dt><dd>mette@eksempel.dk</dd></div>
+                        <div><dt>Adresse</dt><dd>Carportvej 12, 2800 Kgs. Lyngby</dd></div>
+                    </dl>
+                </div>
+            </section>
+
+            <!-- Carport -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-carport"/></svg>
+                    Carport
+                </div>
+                <div class="card-body">
+                    <dl class="details">
+                        <div><dt>Bredde</dt><dd>600 cm</dd></div>
+                        <div><dt>Længde</dt><dd>780 cm</dd></div>
+                        <div><dt>Tag</dt><dd>Fladt tag</dd></div>
+                        <div><dt>Redskabsrum</dt><dd>210 × 530 cm</dd></div>
+                        <div><dt>Sælger</dt><dd>Demo Bruger</dd></div>
+                        <div><dt>Oprettet</dt><dd>27.11.2026 kl. 09:14</dd></div>
+                    </dl>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</main>
+
+<script th:replace="~{fragments/layout :: scripts}" src="../public/js/app.js"></script>
+</body>
+</html>

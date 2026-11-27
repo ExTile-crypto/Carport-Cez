@@ -1,12 +1,167 @@
 <!DOCTYPE html>
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/layout :: head('Dashboard')}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carport</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../public/css/style.css">
+    <title>Dashboard – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
 </head>
 <body>
-<h1>Carport</h1>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+<header th:replace="~{fragments/layout :: topbar('Carport projekt')}"></header>
+<aside th:replace="~{fragments/layout :: sidebar('dashboard', 'salesperson')}"></aside>
+
+<main class="main">
+
+    <div class="page-head">
+        <div>
+            <h1>Carport projekt – Dashboard</h1>
+            <p>Konfigurér, beregn og generér tilbud på en carport</p>
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="col">
+
+            <!-- Configuration -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-sliders"/></svg>
+                    Carport – Konfiguration
+                </div>
+                <form class="card-body" th:action="@{/calculate}" method="post" id="config-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="width">Bredde (udvendig)</label>
+                            <div class="control">
+                                <input type="number" id="width" name="width" value="600" min="240" max="600" step="30" required>
+                                <span class="unit">cm</span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="length">Længde (udvendig)</label>
+                            <div class="control">
+                                <input type="number" id="length" name="length" value="780" min="240" max="780" step="30" required>
+                                <span class="unit">cm</span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="roof">Tagtype</label>
+                            <div class="control select">
+                                <select id="roof" name="roof">
+                                    <option value="flat" selected>Fladt tag</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="roofMaterial">Tagplader</label>
+                            <div class="control select">
+                                <select id="roofMaterial" name="roofMaterial">
+                                    <option selected>Plastmo Ecolite blåtonet</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field span-2">
+                            <label class="check">
+                                <input type="checkbox" name="shed" data-shed-toggle> Med redskabsrum
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label for="shedWidth">Skur bredde</label>
+                            <div class="control">
+                                <input type="number" id="shedWidth" name="shedWidth" placeholder="210" min="150" step="30" data-shed-field>
+                                <span class="unit">cm</span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="shedLength">Skur længde</label>
+                            <div class="control">
+                                <input type="number" id="shedLength" name="shedLength" placeholder="530" min="150" step="30" data-shed-field>
+                                <span class="unit">cm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <button type="submit" class="btn primary"><svg><use href="#i-calc"/></svg> Beregn</button>
+                        <span class="help">Mål i hele cm. Tegning og stykliste opdateres ved beregning.</span>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Calculation result -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-calc"/></svg>
+                    Beregningsresultat
+                </div>
+                <ul class="kv" style="padding-top:8px; padding-bottom:8px">
+                    <li><span>Areal (grundplan)</span><span class="v">46,8 m²</span></li>
+                    <li><span>Spær (45 × 195 mm)</span><span class="v">14 stk.</span></li>
+                    <li><span>Spær c/c afstand</span><span class="v">59,7 cm</span></li>
+                    <li><span>Remme (45 × 195 mm)</span><span class="v">4 stk.</span></li>
+                    <li><span>Stolper (97 × 97 mm)</span><span class="v">6 stk.</span></li>
+                    <li><span>Tagplader</span><span class="v">46,8 m²</span></li>
+                    <li><span>Kostpris (materialer)</span><span class="v">12.450,00 kr.</span></li>
+                    <li><span>Dækningsgrad</span><span class="v margin-good">30,8 %</span></li>
+                    <li class="total"><span>Vejledende salgspris (excl. moms)</span><span class="v">17.995,00 kr.</span></li>
+                </ul>
+            </section>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col">
+
+            <!-- Drawing preview -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-image"/></svg>
+                    Tegning (SVG) – Forhåndsvisning
+                    <div class="right">
+                        <div class="segmented" role="tablist" aria-label="Visning">
+                            <button type="button" class="active">Plan</button>
+                            <button type="button" disabled title="Kommer senere">Side</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawing">
+                    <svg th:replace="~{fragments/drawing :: top(600, 780)}"></svg>
+                </div>
+            </section>
+
+            <!-- Help / legend -->
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-ruler"/></svg>
+                    Sådan læses tegningen
+                </div>
+                <div class="card-body">
+                    <div class="details">
+                        <div><dt>Spær</dt><dd>Lyse tværgående brædder. Ét i hver ende, resten jævnt fordelt (maks. 60 cm).</dd></div>
+                        <div><dt>Remme</dt><dd>De to lange brædder langs siderne. Sadles ned i stolperne.</dd></div>
+                        <div><dt>Stolper</dt><dd>Mørke firkanter på remmene. 97 × 97 mm, 90 cm i jorden.</dd></div>
+                        <div><dt>Hulbånd</dt><dd>De stiplede diagonaler. Vindkryds oven på spærene.</dd></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bottom actions -->
+    <div class="toolbar">
+        <button type="reset" form="config-form" class="btn"><svg><use href="#i-reset"/></svg> Nulstil</button>
+        <span class="push"></span>
+        <button type="button" class="btn"><svg><use href="#i-save"/></svg> Gem som kladde</button>
+        <a class="btn" th:href="@{/drawing.svg(width=600,length=780)}" href="#"><svg><use href="#i-download"/></svg> Download tegning (SVG)</a>
+        <a class="btn primary" th:href="@{/request}" href="request.html"><svg><use href="#i-cart"/></svg> Opret forespørgsel</a>
+    </div>
+
+</main>
+
+<script th:replace="~{fragments/layout :: scripts}" src="../public/js/app.js"></script>
 </body>
 </html>

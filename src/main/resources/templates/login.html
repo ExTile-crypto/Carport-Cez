@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Log ind')}">
+    <meta charset="UTF-8">
+    <title>Log ind – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+
+<div class="auth">
+
+    <aside class="auth-side">
+        <a class="brand" th:href="@{/}" href="index.html">
+            <svg class="brand-mark"><use href="#i-fog"/></svg>
+            <span class="brand-name">Fog</span>
+        </a>
+
+        <div class="hero">
+            <h2>Carport projekt</h2>
+            <p>Få et tilbud på en carport med fladt tag, skræddersyet til dine mål.
+               Tegning og pris beregnes automatisk.</p>
+            <svg viewBox="0 0 440 180" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+                <path d="M30 60 220 20l190 40-190 40z"/>
+                <path d="M30 60v10l190 40 190-40V60"/>
+                <path d="M50 73v90M120 88v90M220 110v70M320 88v90M390 73v90"/>
+                <path d="M320 92v86h70V78" opacity=".8"/>
+                <path d="M330 100h50M330 115h50M330 130h50M330 145h50M330 160h50" opacity=".5"/>
+                <path d="M10 175h420" opacity=".4"/>
+            </svg>
+        </div>
+
+        <p class="legal">Johannes Fog A/S · Semesterprojekt · Demo</p>
+    </aside>
+
+    <section class="auth-form">
+        <form class="auth-card" th:action="@{/login}" method="post">
+            <h1>Log ind</h1>
+            <p>Brug din e-mail og adgangskode.</p>
+
+            <div class="notice warn mb-16" th:if="${error}">
+                <svg><use href="#i-info"/></svg>
+                <span th:text="${error}">Forkert e-mail eller adgangskode.</span>
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+                <div class="control">
+                    <input type="email" id="email" name="email" placeholder="navn@eksempel.dk" autocomplete="username" required autofocus>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="password">Adgangskode</label>
+                <div class="control">
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary block">
+                <svg><use href="#i-logout"/></svg> Log ind
+            </button>
+
+            <p class="alt">Ny kunde? <a th:href="@{/request}" href="request.html">Send en forespørgsel uden login</a></p>
+        </form>
+    </section>
+
+</div>
+
+</body>
+</html>

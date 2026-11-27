@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<!--
+  Shared layout fragments.
+  Use with:  th:replace="~{fragments/layout :: head('Titel')}"
+             th:replace="~{fragments/layout :: icons}"
+             th:replace="~{fragments/layout :: topbar('Carport projekt')}"
+             th:replace="~{fragments/layout :: sidebar('dashboard', 'salesperson')}"
+-->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} + ' – Fog Carport'">Fog Carport</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../public/css/style.css">
+</head>
+<body>
+
+<!-- ================= ICON SPRITE ================= -->
+<svg th:fragment="icons" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+        <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+        <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+        <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></symbol>
+        <symbol id="i-carport" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10l10-6 10 6"/><path d="M4 9v12M20 9v12M4 21h16"/></symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+        <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+        <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></symbol>
+        <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></symbol>
+        <symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+        <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+        <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></symbol>
+        <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+        <symbol id="i-fog" viewBox="0 0 26 32" fill="currentColor"><path d="M14 0h12L12 32H0z"/></symbol>
+    </defs>
+</svg>
+
+<!-- ================= TOPBAR ================= -->
+<header class="topbar" th:fragment="topbar(title)">
+    <a class="brand" th:href="@{/}" href="index.html" aria-label="Fog Carport forside">
+        <svg class="brand-mark"><use href="#i-fog"/></svg>
+        <span class="brand-name">Fog</span>
+    </a>
+    <span class="topbar-divider"></span>
+    <span class="topbar-title" th:text="${title}">Carport projekt</span>
+    <button class="icon-btn menu-toggle" type="button" data-nav-toggle aria-label="Menu">
+        <svg><use href="#i-menu"/></svg>
+    </button>
+    <span class="topbar-spacer"></span>
+    <button class="icon-btn" type="button" aria-label="Hjælp"><svg><use href="#i-help"/></svg></button>
+    <button class="icon-btn" type="button" aria-label="Notifikationer"><svg><use href="#i-bell"/></svg><span class="dot"></span></button>
+    <a class="user-menu" th:href="@{/logout}" href="login.html" title="Log ud">
+        <svg><use href="#i-user"/></svg>
+        <span th:text="${session != null and session.currentUser != null} ? ${session.currentUser.name} : 'Demo Bruger'">Demo Bruger</span>
+        <svg class="chev"><use href="#i-chevron"/></svg>
+    </a>
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+<!-- active: dashboard | new | mine | offers | orders | customers | admin -->
+<aside class="sidebar" th:fragment="sidebar(active, role)">
+    <nav class="nav" aria-label="Hovedmenu">
+
+        <!-- Salesperson navigation -->
+        <th:block th:if="${role != 'customer'}">
+            <a th:href="@{/}" href="index.html" th:classappend="${active == 'dashboard'} ? 'active'">
+                <svg><use href="#i-home"/></svg> Dashboard
+            </a>
+            <a th:href="@{/request}" href="request.html" th:classappend="${active == 'new'} ? 'active'">
+                <svg><use href="#i-plus"/></svg> Ny carport
+            </a>
+            <a th:href="@{/orders(status='request')}" href="orders.html" th:classappend="${active == 'requests'} ? 'active'">
+                <svg><use href="#i-layers"/></svg> Forespørgsler
+            </a>
+            <a th:href="@{/orders(status='offer_sent')}" href="orders.html" th:classappend="${active == 'offers'} ? 'active'">
+                <svg><use href="#i-file"/></svg> Tilbud
+            </a>
+            <a th:href="@{/orders}" href="orders.html" th:classappend="${active == 'orders'} ? 'active'">
+                <svg><use href="#i-cart"/></svg> Ordrer
+            </a>
+            <span class="nav-sep"></span>
+            <a th:href="@{/customers}" href="#" th:classappend="${active == 'customers'} ? 'active'">
+                <svg><use href="#i-users"/></svg> Kunder
+            </a>
+            <a th:href="@{/admin/materials}" href="#" th:classappend="${active == 'admin'} ? 'active'">
+                <svg><use href="#i-settings"/></svg> Administration
+                <svg class="chev"><use href="#i-chevron"/></svg>
+            </a>
+        </th:block>
+
+        <!-- Customer navigation -->
+        <th:block th:if="${role == 'customer'}">
+            <a th:href="@{/customer/orders}" href="customer-order.html" th:classappend="${active == 'mine'} ? 'active'">
+                <svg><use href="#i-layers"/></svg> Mine carporte
+            </a>
+            <a th:href="@{/request}" href="request.html" th:classappend="${active == 'new'} ? 'active'">
+                <svg><use href="#i-plus"/></svg> Ny forespørgsel
+            </a>
+            <span class="nav-sep"></span>
+            <a th:href="@{/customer/profile}" href="#" th:classappend="${active == 'profile'} ? 'active'">
+                <svg><use href="#i-user"/></svg> Min profil
+            </a>
+        </th:block>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        <svg class="thumb" viewBox="0 0 160 70" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+            <path d="M10 22 80 8l70 14-70 14z"/>
+            <path d="M10 22v4l70 14 70-14v-4"/>
+            <path d="M18 27v34M46 33v34M80 40v30M114 33v34M142 27v34"/>
+            <path d="M46 67h34M80 70h62" opacity=".5"/>
+            <path d="M114 36v31h28V31" opacity=".8"/>
+            <path d="M118 40h20M118 46h20M118 52h20M118 58h20" opacity=".5"/>
+        </svg>
+        <strong>Fog Carporte</strong>
+        <small>Konfigurér · Beregn · Tegn · Tilbud</small>
+    </div>
+</aside>
+
+<script th:fragment="scripts" th:src="@{/js/app.js}" src="../../public/js/app.js"></script>
+</body>
+</html>

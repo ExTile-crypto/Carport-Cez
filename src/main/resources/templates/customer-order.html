@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Min carport')}">
+    <meta charset="UTF-8">
+    <title>Min carport – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+<header th:replace="~{fragments/layout :: topbar('Mine carporte')}"></header>
+<aside th:replace="~{fragments/layout :: sidebar('mine', 'customer')}"></aside>
+
+<main class="main">
+
+    <div class="page-head">
+        <div>
+            <h1>Din carport – 600 × 780 cm</h1>
+            <p>Forespørgsel sendt 27.11.2026. Her kan du følge status og se dit tilbud.</p>
+        </div>
+        <div class="actions">
+            <span class="badge offer_sent" style="font-size:15px; padding:8px 14px">Tilbud sendt</span>
+        </div>
+    </div>
+
+    <!-- Status stepper -->
+    <section class="card mb-16">
+        <div class="stepper">
+            <div class="step done"><span class="n"><svg width="16" height="16"><use href="#i-check"/></svg></span> Forespørgsel modtaget</div>
+            <span class="step-line done"></span>
+            <div class="step current"><span class="n">2</span> Tilbud sendt</div>
+            <span class="step-line"></span>
+            <div class="step"><span class="n">3</span> Betalt</div>
+            <span class="step-line"></span>
+            <div class="step"><span class="n">4</span> Leveret</div>
+        </div>
+    </section>
+
+    <div class="grid grid-wide">
+
+        <!-- LEFT -->
+        <div class="col">
+
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-image"/></svg>
+                    Tegning – set fra oven
+                    <div class="right">
+                        <a class="btn sm" th:href="@{/customer/orders/{id}/drawing.svg(id='demo')}" href="#"><svg><use href="#i-download"/></svg> Download SVG</a>
+                    </div>
+                </div>
+                <div class="drawing">
+                    <svg th:replace="~{fragments/drawing :: top(600, 780)}"></svg>
+                </div>
+            </section>
+
+            <!-- Parts list: locked until paid -->
+            <section class="card" th:if="${order == null or !(order.status == 'paid' or order.status == 'delivered')}">
+                <div class="card-head">
+                    <svg><use href="#i-lock"/></svg>
+                    Stykliste
+                </div>
+                <div class="card-body">
+                    <div class="notice locked">
+                        <svg><use href="#i-lock"/></svg>
+                        <span>Den fulde stykliste med alle materialer og mængder bliver tilgængelig her, når ordren er betalt.
+                              Indtil da kan du se tegningen og den samlede pris.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Parts list: visible when paid (rendered by Thymeleaf only) -->
+            <section class="card" th:if="${order != null and (order.status == 'paid' or order.status == 'delivered')}">
+                <div class="card-head">
+                    <svg><use href="#i-list"/></svg>
+                    Stykliste
+                </div>
+                <div class="card-body tight">
+                    <table class="table">
+                        <thead>
+                        <tr><th>Materiale</th><th class="num">Længde</th><th class="num">Antal</th><th>Enhed</th><th>Beskrivelse</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="line : ${orderLines}">
+                            <td th:text="${line.materialName}">97×97 mm trykimp. stolpe</td>
+                            <td class="num" th:text="${line.length != null} ? ${line.length} + ' cm' : '–'">300 cm</td>
+                            <td class="num" th:text="${line.quantity}">6</td>
+                            <td th:text="${line.unit}">stk</td>
+                            <td class="muted" th:text="${line.description}">Stolper nedgraves 90 cm i jord</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col">
+
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-file"/></svg>
+                    Dit tilbud
+                </div>
+                <div class="card-body">
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span class="lbl">Carport</span>
+                            <span class="val">600 × 780 cm, fladt tag</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="lbl">Redskabsrum</span>
+                            <span class="val">210 × 530 cm</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="lbl">Pris excl. moms</span>
+                            <span class="val">17.995,00 kr.</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="lbl">Moms (25 %)</span>
+                            <span class="val">4.498,75 kr.</span>
+                        </div>
+                        <div class="price-row big">
+                            <span class="lbl">Pris i alt</span>
+                            <span class="val">22.493,75 kr.</span>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <button type="button" class="btn primary block"><svg><use href="#i-check"/></svg> Acceptér tilbud</button>
+                    </div>
+                    <p class="help mt-16">Betaling foregår ved henvendelse til din sælger. Når betalingen er registreret, frigives styklisten.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-user"/></svg>
+                    Din sælger
+                </div>
+                <div class="card-body">
+                    <dl class="details">
+                        <div><dt>Navn</dt><dd>Demo Bruger</dd></div>
+                        <div><dt>Telefon</dt><dd>+45 45 87 00 00</dd></div>
+                        <div style="grid-column:span 2"><dt>E-mail</dt><dd>carport@johannesfog.dk</dd></div>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-head">
+                    <svg><use href="#i-help"/></svg>
+                    Spørgsmål?
+                </div>
+                <div class="card-body">
+                    <p class="muted">Har du ændringer til mål eller redskabsrum, så kontakt din sælger. Vi laver et nyt tilbud med opdateret tegning.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</main>
+
+<script th:replace="~{fragments/layout :: scripts}" src="../public/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Ordrer')}">
+    <meta charset="UTF-8">
+    <title>Ordrer – Fog Carport</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<svg th:replace="~{fragments/layout :: icons}"></svg>
+<header th:replace="~{fragments/layout :: topbar('Carport projekt')}"></header>
+<aside th:replace="~{fragments/layout :: sidebar('orders', 'salesperson')}"></aside>
+
+<main class="main">
+
+    <div class="page-head">
+        <div>
+            <h1>Forespørgsler og ordrer</h1>
+            <p>Alle kundernes carport-forespørgsler. Åbn en for at se stykliste, pris og tegning.</p>
+        </div>
+        <div class="actions">
+            <a class="btn primary" th:href="@{/request}" href="request.html"><svg><use href="#i-plus"/></svg> Ny carport</a>
+        </div>
+    </div>
+
+    <div class="row mb-16">
+        <nav class="tabs" aria-label="Filtrér på status">
+            <a th:href="@{/orders}" href="#" class="active">Alle <span class="count">24</span></a>
+            <a th:href="@{/orders(status='request')}" href="#">Forespørgsel <span class="count">11</span></a>
+            <a th:href="@{/orders(status='offer_sent')}" href="#">Tilbud sendt <span class="count">8</span></a>
+            <a th:href="@{/orders(status='paid')}" href="#">Betalt <span class="count">3</span></a>
+            <a th:href="@{/orders(status='delivered')}" href="#">Leveret <span class="count">2</span></a>
+        </nav>
+        <form class="search push" role="search">
+            <svg><use href="#i-search"/></svg>
+            <input type="search" name="q" placeholder="Søg kunde, e-mail eller ordrenr.">
+        </form>
+    </div>
+
+    <section class="card">
+        <div class="card-body tight">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Dato</th>
+                    <th>Kunde</th>
+                    <th>Mål (B × L)</th>
+                    <th>Redskabsrum</th>
+                    <th>Sælger</th>
+                    <th>Status</th>
+                    <th class="num">Salgspris</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- th:each="order : ${orders}" -->
+                <tr>
+                    <td class="muted">27.11.2026</td>
+                    <td><strong>Mette Sørensen</strong><br><span class="muted">mette@eksempel.dk</span></td>
+                    <td class="num">600 × 780 cm</td>
+                    <td>210 × 530 cm</td>
+                    <td class="muted">–</td>
+                    <td><span class="badge request">Forespørgsel</span></td>
+                    <td class="num muted">–</td>
+                    <td class="text-right"><a class="btn sm" th:href="@{/orders/{id}(id='demo')}" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                <tr>
+                    <td class="muted">26.11.2026</td>
+                    <td><strong>Jonas Kristensen</strong><br><span class="muted">jonas.k@eksempel.dk</span></td>
+                    <td class="num">480 × 600 cm</td>
+                    <td class="muted">Nej</td>
+                    <td class="muted">–</td>
+                    <td><span class="badge request">Forespørgsel</span></td>
+                    <td class="num muted">–</td>
+                    <td class="text-right"><a class="btn sm" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                <tr>
+                    <td class="muted">24.11.2026</td>
+                    <td><strong>Anne Lund</strong><br><span class="muted">anne.lund@eksempel.dk</span></td>
+                    <td class="num">600 × 600 cm</td>
+                    <td class="muted">Nej</td>
+                    <td>Demo Bruger</td>
+                    <td><span class="badge offer_sent">Tilbud sendt</span></td>
+                    <td class="num">15.450,00 kr.</td>
+                    <td class="text-right"><a class="btn sm" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                <tr>
+                    <td class="muted">21.11.2026</td>
+                    <td><strong>Peter Hansen</strong><br><span class="muted">peter.h@eksempel.dk</span></td>
+                    <td class="num">540 × 720 cm</td>
+                    <td>210 × 420 cm</td>
+                    <td>Demo Bruger</td>
+                    <td><span class="badge offer_sent">Tilbud sendt</span></td>
+                    <td class="num">21.900,00 kr.</td>
+                    <td class="text-right"><a class="btn sm" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                <tr>
+                    <td class="muted">18.11.2026</td>
+                    <td><strong>Lars Nielsen</strong><br><span class="muted">lars@eksempel.dk</span></td>
+                    <td class="num">600 × 780 cm</td>
+                    <td>210 × 530 cm</td>
+                    <td>Demo Bruger</td>
+                    <td><span class="badge paid">Betalt</span></td>
+                    <td class="num">17.995,00 kr.</td>
+                    <td class="text-right"><a class="btn sm" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                <tr>
+                    <td class="muted">03.11.2026</td>
+                    <td><strong>Sofie Madsen</strong><br><span class="muted">sofie.m@eksempel.dk</span></td>
+                    <td class="num">360 × 480 cm</td>
+                    <td class="muted">Nej</td>
+                    <td>Demo Bruger</td>
+                    <td><span class="badge delivered">Leveret</span></td>
+                    <td class="num">9.800,00 kr.</td>
+                    <td class="text-right"><a class="btn sm" href="order.html"><svg><use href="#i-eye"/></svg> Åbn</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-foot">
+            <span class="muted">Viser 6 af 24</span>
+            <span class="push" style="margin-left:auto"></span>
+            <button class="btn sm" type="button" disabled>Forrige</button>
+            <button class="btn sm" type="button">Næste</button>
+        </div>
+    </section>
+
+</main>
+
+<script th:replace="~{fragments/layout :: scripts}" src="../public/js/app.js"></script>
+</body>
+</html>

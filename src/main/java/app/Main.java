@@ -20,7 +20,14 @@ public class Main {
             config.staticFiles.add("/public");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
 
+            // Static page previews (replace with controller routes as features land)
             config.routes.get("/", ctx -> ctx.render("index"));
+            config.routes.get("/login", ctx -> ctx.render("login"));
+            config.routes.get("/request", ctx -> ctx.render("request"));
+            config.routes.get("/orders", ctx -> ctx.render("orders"));
+            config.routes.get("/orders/{id}", ctx -> ctx.render("order"));
+            config.routes.get("/customer/orders", ctx -> ctx.render("customer-order"));
+            config.routes.get("/customer/orders/{id}", ctx -> ctx.render("customer-order"));
 
             // Register controllers here, e.g.:
             // UserController userController = new UserController(connectionPool);
